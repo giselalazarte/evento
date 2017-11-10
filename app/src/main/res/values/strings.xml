@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Jujuy Eventos</string>
+    <string name="title_activity_segunda"> Jujuy Eventos</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="event1_titulo">CARS 3</string>
+    <string name="event1_fecha">03/11/2017</string>
+    <string name="event1_hora">14:00</string>
+    <string name="event1_detalle">Rayo McQueen sigue siendo el mejor coche de carreras del mundo, pero ahora que es uno de los más veteranos del circuito, debe demostrar a todo el mundo que aún puede ganar una gran carrera y que no necesita jubilarse. En esta ocasión, el famoso bólido de carreras tendrá que enfrentarse a una nueva generación de corredores más jóvenes, potentes y veloces, que amenaza con cambiar el deporte de su vida. Entre ellos está el competitivo y revolucionario Jackson Storm, que no se lo pondrá nada fácil.</string>
+    <string name="event1_categoria">cine</string>
+
+    <string name="event2_titulo">CONDORITO:LA PELICULA</string>
+    <string name="event2_fecha">03/11/2017</string>
+    <string name="event2_hora">14:00</string>
+    <string name="event2_detalle">El pajarraco más querido de Pelotillehue emprenderá, junto a su tenaz sobrino Coné, una peligrosa aventura para rescatar a su desaparecida suegra Doña Tremebunda, abducida misteriosamente por una banda alienígena. Lo que no ha tomado en cuenta es que, mientras intenta reparar el error con la madre de Yayita, ésta será tentada románticamente por el insistente Pepe Cortisona.</string>
+    <string name="event2_categoria">cine</string>
+
+    <string name="event3_titulo">SERENATA A LA NIÑA YOLANDA</string>
+    <string name="event3_lugar">Lozano</string>
+    <string name="event3_fecha">03/11/2017</string>
+    <string name="event3_hora">14:00</string>
+    <string name="event3_detalle">Encuentro de músicos, poetas y artistas plásticos de todo el país en homenaje a Yolanda de Carenzo.</string>
+    <string name="event3_precio">$45</string>
+    <string name="event3_categoria">festival</string>
+
+    <string name="event4_titulo">40º FESTIVAL PROVINCIAL DEL QUESILLO Y EL FOLKLORE</string>
+    <string name="event4_lugar">San Antonio</string>
+    <string name="event4_fecha">03/11/2017</string>
+    <string name="event4_hora">14:00</string>
+    <string name="event4_detalle">40º Edición del Tradicional Festival con reconocidas figuras provinciales y nacionales del folclore argentino. Venta de artesanías de la zona y comidas regionales.</string>
+    <string name="event4_precio">$45</string>
+    <string name="event4_categoria">festival</string>
+</resources>
