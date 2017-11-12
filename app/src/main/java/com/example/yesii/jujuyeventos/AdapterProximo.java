@@ -16,93 +16,112 @@ import java.util.List;
  * Created by Gisela on 02/11/2017.
  */
 
-public class AdapterProximo extends RecyclerView.Adapter<AdapterProximo.ProximosViewHolder> implements View.OnClickListener{
+
+public class AdapterProximo extends RecyclerView.Adapter<AdapterProximo.ProximosViewHolder> {
 
     ArrayList<Evento> eventoList;
     CustomFilter filter;
     ArrayList<Evento> filterList;
-    private View.OnClickListener listener;
+//    private View.OnClickListener listener;
+    private final OnItemClickListener listener;
 
-public AdapterProximo(ArrayList<Evento> eventoList) {
+
+    public AdapterProximo(ArrayList<Evento> eventoList, OnItemClickListener listener) {
         this.eventoList = eventoList;
-    filterList=eventoList;
-        }
+        filterList = eventoList;
+        this.listener = listener;
+    }
 
-@Override
-public ProximosViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.item_proximos,null,false);
+    @Override
+    public ProximosViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_proximos, null, false);
 
         return new ProximosViewHolder(view);
-        }
+    }
 
-@Override
-public void onBindViewHolder(ProximosViewHolder holder, int position) {
+    @Override
+    public void onBindViewHolder(ProximosViewHolder holder, int position) {
+        holder.bind(eventoList.get(position), listener);
+//        holder.titulo.setText(eventoList.get(position).getTitulo());
+//        holder.fecha.setText(eventoList.get(position).getFecha());
+//        holder.detalle.setText(eventoList.get(position).getDetalle());
+//        holder.image.setImageDrawable(eventoList.get(position).getImage());
 
-        holder.titulo.setText(eventoList.get(position).getTitulo());
-        holder.fecha.setText(eventoList.get(position).getFecha());
-        holder.detalle.setText(eventoList.get(position).getDetalle());
-        holder.image.setImageDrawable(eventoList.get(position).getImage());
+    }
 
-        }
-
-@Override
-public int getItemCount() {
+    @Override
+    public int getItemCount() {
         return eventoList.size();
-        }
+    }
 
     public Filter getFilter() {
-        if(filter==null) {
+        if (filter == null) {
             filter = new CustomFilter();
         }
         return filter;
 
     }
 
-    public void setOnClickListener(View.OnClickListener listener){
-        this.listener=listener;
+//    public void setOnClickListener(OnItemClickListener listener) {
+//        this.listener = listener;
+//
+//    }
 
-    }
+//    @Override
+//    public void onClick(View v) {
+//        if (listener != null) {
+//            listener.onItemClick(v);
+//        }
+//    }
 
-    @Override
-    public void onClick(View v) {
-        if(listener!=null){
-            listener.onClick(v);
-
-        }
+    public interface OnItemClickListener {
+        void onItemClick(Evento item);
     }
 
     public class ProximosViewHolder extends RecyclerView.ViewHolder {
 
-    TextView titulo,fecha,detalle;
-    ImageView image;
+        TextView titulo, fecha, detalle;
+        ImageView image;
 
-    public ProximosViewHolder(View itemView) {
-        super(itemView);
+        public ProximosViewHolder(View itemView) {
+            super(itemView);
 
-        titulo=(TextView) itemView.findViewById(R.id.tituloTxt);
-        fecha=(TextView) itemView.findViewById(R.id.fechaTxt);
-        detalle=(TextView) itemView.findViewById(R.id.detalleTxt);
-        image=(ImageView) itemView.findViewById(R.id.imageView);
+            titulo = (TextView) itemView.findViewById(R.id.tituloTxt);
+            fecha = (TextView) itemView.findViewById(R.id.fechaTxt);
+            detalle = (TextView) itemView.findViewById(R.id.detalleTxt);
+            image = (ImageView) itemView.findViewById(R.id.imageView);
+        }
+
+
+        public void bind(final Evento evento, final OnItemClickListener listener) {
+            titulo.setText(evento.getTitulo());
+            fecha.setText(evento.getFecha());
+            detalle.setText(evento.getDetalle());
+            image.setImageDrawable(evento.getImage());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onItemClick(evento);
+                }
+            });
+        }
     }
-}
 
 
-    class CustomFilter extends Filter
-    {
+    class CustomFilter extends Filter {
         public CustomFilter() {
-            filterList=eventoList;
+            filterList = eventoList;
         }
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            FilterResults resultado=new FilterResults();
-            if(constraint!=null&&constraint.length()>0){
-                ArrayList<Evento> filters= new ArrayList<Evento>();
-                for(int i=0; i<filterList.size();i++){
-                    if((filterList.get(i).getTitulo().toLowerCase().contains(constraint)||
-                            filterList.get(i).getTitulo().toUpperCase().contains(constraint))||
-                            (filterList.get(i).getFecha().contains(constraint))){
-                        Evento e=new Evento(filterList.get(i).getTitulo(),
+            FilterResults resultado = new FilterResults();
+            if (constraint != null && constraint.length() > 0) {
+                ArrayList<Evento> filters = new ArrayList<Evento>();
+                for (int i = 0; i < filterList.size(); i++) {
+                    if ((filterList.get(i).getTitulo().toLowerCase().contains(constraint) ||
+                            filterList.get(i).getTitulo().toUpperCase().contains(constraint)) ||
+                            (filterList.get(i).getFecha().contains(constraint))) {
+                        Evento e = new Evento(filterList.get(i).getTitulo(),
                                 filterList.get(i).getLugar1(),
                                 filterList.get(i).getFecha(),
                                 filterList.get(i).getHora1(),
@@ -121,19 +140,19 @@ public int getItemCount() {
 
                 }
 
-                resultado.count=filters.size();
-                resultado.values=filters;
+                resultado.count = filters.size();
+                resultado.values = filters;
 
-            }else{
-                resultado.count=filterList.size();
-                resultado.values=filterList;
+            } else {
+                resultado.count = filterList.size();
+                resultado.values = filterList;
             }
             return resultado;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            eventoList=(ArrayList<Evento>) results.values;
+            eventoList = (ArrayList<Evento>) results.values;
             notifyDataSetChanged();
 
 

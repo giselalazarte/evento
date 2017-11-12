@@ -44,7 +44,12 @@ public class ProximosFragment extends Fragment {
 
         getEventoList();
 
-        adapterProximo= new AdapterProximo(eventos);
+        adapterProximo= new AdapterProximo(eventos, new AdapterProximo.OnItemClickListener() {
+            @Override public void onItemClick(Evento item) {
+                Toast.makeText(getContext(), "Item Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+
         recyclerView.setAdapter(adapterProximo);
 
         sv=(SearchView) view.findViewById(R.id.searchView);
@@ -64,13 +69,13 @@ public class ProximosFragment extends Fragment {
 
         });
 
-        adapterProximo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                interfaceComunicateFragment.enviarEvento(eventos.get(recyclerView.getChildAdapterPosition(v)));
-            }
-        });
+//        adapterProximo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getActivity(), "Clicked fragment ", Toast.LENGTH_SHORT).show();
+//                interfaceComunicateFragment.enviarEvento(eventos.get(recyclerView.getChildAdapterPosition(v)));
+//            }
+//        });
 
 
         return view;
