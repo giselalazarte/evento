@@ -97,8 +97,11 @@ public class SegundaActivity extends AppCompatActivity  implements ProximosFragm
         Bundle bundleEnvio = new Bundle();
         bundleEnvio.putSerializable("objeto",evento);
         detalle.setArguments(bundleEnvio);
-        mSectionsPagerAdapter.getItem(0).getFragmentManager().beginTransaction().replace(R.id.containerId,detalle).commit();
-
+//        this.getSupportFragmentManager().beginTransaction().replace(R.id.containerId,detalle).commit();
+        this.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.containerId, detalle, detalle.getTag())
+                .addToBackStack(null)
+                .commit();
     }
 
 

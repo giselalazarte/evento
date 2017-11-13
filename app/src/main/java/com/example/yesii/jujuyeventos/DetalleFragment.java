@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,8 +82,9 @@ public class DetalleFragment extends Fragment {
             txtDetalle =(TextView) view.findViewById(R.id.detalleTxt);
             txtPrecio1 =(TextView) view.findViewById(R.id.precio1Txt);
             txtTitulo.setText(evento.getTitulo());
+            System.out.println("TITULO EN DETALLE: " + evento.getTitulo());
             txtLugar1.setText("LUGAR: " + evento.getLugar1());
-            txtFecha.setText("FECHA: " + evento.getFecha());
+//            txtFecha.setText("FECHA: " + evento.getFecha());
             txtHora1.setText("HORA: " + evento.getHora1());
             txtDetalle.setText(evento.getDetalle());
             txtPrecio1.setText("PRECIO: " + evento.getPrecio1());

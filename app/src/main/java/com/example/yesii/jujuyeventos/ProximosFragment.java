@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,8 +46,9 @@ public class ProximosFragment extends Fragment {
         getEventoList();
 
         adapterProximo= new AdapterProximo(eventos, new AdapterProximo.OnItemClickListener() {
-            @Override public void onItemClick(Evento item) {
-                Toast.makeText(getContext(), "Item Clicked", Toast.LENGTH_LONG).show();
+            @Override public void onItemClick(Evento evento) {
+                Toast.makeText(getContext(), "Item Clicked" + evento.getTitulo(), Toast.LENGTH_LONG).show();
+                interfaceComunicateFragment.enviarEvento(evento);
             }
         });
 
