@@ -1,6 +1,7 @@
 package com.example.yesii.jujuyeventos;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.app.FragmentTransaction;
 
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.yesii.jujuyeventos.interfaces.IComunicateFragment;
@@ -40,7 +42,6 @@ public class SegundaActivity extends AppCompatActivity  implements ProximosFragm
      */
     private ViewPager mViewPager;
     IComunicateFragment interfaceComunicateFragment;
-    ProximosFragment proximosFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,20 @@ public class SegundaActivity extends AppCompatActivity  implements ProximosFragm
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        if (savedInstanceState == null) {
+            ProximosFragment f1= new ProximosFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragm, f1)
+                    .addToBackStack(null)
+                    .commit();
+
+        }
+//        FragmentManager manager = getSupportFragmentManager();
+//        Fragment fragment = manager.findFragmentById(R.id.fragm);
+//
+//        if (fragment == null) {
+//            fragment = new DetalleFragment();
+//        }
     }
 
 
@@ -92,19 +107,31 @@ public class SegundaActivity extends AppCompatActivity  implements ProximosFragm
 
     @Override
     public void enviarEvento(Evento evento) {
-        System.out.println("HOLA");
-        DetalleFragment detalle = new DetalleFragment();
-        Bundle bundleEnvio = new Bundle();
-        bundleEnvio.putSerializable("objeto",evento);
-        detalle.setArguments(bundleEnvio);
-//        this.getSupportFragmentManager().beginTransaction().replace(R.id.containerId,detalle).commit();
-        this.getSupportFragmentManager().beginTransaction()
-                .replace(R.id.containerId, detalle, detalle.getTag())
-                .addToBackStack(null)
-                .commit();
+//        System.out.println("HOLA");
+//        DetalleFragment detalle = new DetalleFragment();
+//        Bundle bundleEnvio = new Bundle();
+//        bundleEnvio.putSerializable("objeto",evento);
+//        detalle.setArguments(bundleEnvio);
+////        this.getSupportFragmentManager().beginTransaction().replace(R.id.containerId,detalle).commit();
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.containerId, detalle)
+//                .addToBackStack(null)
+//                .commit();
+        Intent intent = new Intent(this, DetalleActivity.class);
+        intent.putExtra("titulo", evento.getTitulo());
+        intent.putExtra("lugar1", evento.getLugar1());
+        intent.putExtra("lugar2", evento.getLugar2());
+        intent.putExtra("fecha", evento.getFecha());
+        intent.putExtra("hora1", evento.getHora1());
+        intent.putExtra("hora2", evento.getHora2());
+        intent.putExtra("detalle", evento.getDetalle());
+        intent.putExtra("precio1", evento.getPrecio1());
+        intent.putExtra("precio2", evento.getPrecio2());
+        intent.putExtra("categoria", evento.getCategoria());
+        intent.putExtra("videoView", evento.getVideoView());
+//        intent.putExtra("eventoBdl", bundleEnvio); // No se puede enviar el Bundle porque Evento posee una imagen y no es serializable.
+        startActivity(intent);
     }
-
-
 
 
 

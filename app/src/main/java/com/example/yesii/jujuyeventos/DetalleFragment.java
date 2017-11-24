@@ -20,32 +20,37 @@ public class DetalleFragment extends Fragment {
     VideoView videoView;
     OnFragmentInteractionListener mListener;
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
+    public static final String ARG_ITEM_ID = "item_id";
+//    private static final String ARG_PARAM1 = "param1";
+//    private static final String ARG_PARAM2 = "param2";
+//    private String mParam1;
+//    private String mParam2;
 
 
     public DetalleFragment() {
         // Required empty public constructor
     }
 
-    public static DetalleFragment newInstance(String param1, String param2) {
-        DetalleFragment fragment = new DetalleFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    public static DetalleFragment newInstance(String param1, String param2) {
+//        DetalleFragment fragment = new DetalleFragment();
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+//        if (getArguments().containsKey(ARG_ITEM_ID)) {
+//            int index = Integer.valueOf(getArguments().getString(ARG_ITEM_ID));
+//            evento=(Evento) PersonaContent.getPersonList().get(index);
+//        }
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
     }
 
     @Override
@@ -72,7 +77,7 @@ public class DetalleFragment extends Fragment {
                 videoView.start();
                 videoView.requestFocus();
             }else {
-                imageView = (ImageView) view.findViewById(R.id.imageView);
+                imageView = (ImageView) view.findViewById(R.id.imageViewImg);
                 imageView.setImageDrawable(evento.getImage());
             }
             txtTitulo =(TextView) view.findViewById(R.id.tituloTxt);
@@ -83,6 +88,7 @@ public class DetalleFragment extends Fragment {
             txtPrecio1 =(TextView) view.findViewById(R.id.precio1Txt);
             txtTitulo.setText(evento.getTitulo());
             System.out.println("TITULO EN DETALLE: " + evento.getTitulo());
+            System.out.println("TITULO EN DETALLE: " + txtTitulo.getText());
             txtLugar1.setText("LUGAR: " + evento.getLugar1());
 //            txtFecha.setText("FECHA: " + evento.getFecha());
             txtHora1.setText("HORA: " + evento.getHora1());
